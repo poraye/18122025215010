@@ -22,6 +22,10 @@
     ============================================= -->
     <div class="particles-container" id="particles"></div>
     <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="petals-container" id="petals"></div>
+    <div class="shooting-stars" id="shootingStars"></div>
+    <div class="floating-quotes" id="floatingQuotes"></div>
+    <div class="confetti-container" id="confetti"></div>
     
     <!-- ============================================
          🎵 CONTROL DE MÚSICA (Opcional)
@@ -119,7 +123,46 @@
     </section>
 
     <!-- ============================================
-         📱 PANTALLA 3: SORPRESA FINAL
+         � PANTALLA 2.5: GALERÍA DE MOMENTOS
+         Fotos de sus momentos especiales
+    ============================================= -->
+    <section class="screen screen-gallery" id="screenGallery">
+        <div class="gallery-container">
+            <h2 class="gallery-title shimmer-text">Nuestros Momentos 💕</h2>
+            <p class="gallery-subtitle">Cada foto cuenta nuestra historia...</p>
+            
+            <!-- 🎨 PERSONALIZACIÓN: Agrega tus fotos en assets/img/ -->
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-caption="Nuestro primer momento juntos 💕">
+                    <div class="gallery-placeholder">📸<br><small>Foto 1</small></div>
+                </div>
+                <div class="gallery-item" data-caption="Un día especial ✨">
+                    <div class="gallery-placeholder">📸<br><small>Foto 2</small></div>
+                </div>
+                <div class="gallery-item" data-caption="Juntos y felices 💖">
+                    <div class="gallery-placeholder">📸<br><small>Foto 3</small></div>
+                </div>
+                <div class="gallery-item" data-caption="Amor infinito 💝">
+                    <div class="gallery-placeholder">📸<br><small>Foto 4</small></div>
+                </div>
+            </div>
+            
+            <!-- Contador de tiempo juntos -->
+            <div class="time-together" id="timeTogether">
+                <div class="time-heart">💑</div>
+                <p class="time-label">Tiempo juntos:</p>
+                <div class="time-counter" id="timeCounter"></div>
+            </div>
+            
+            <button class="btn-romantic btn-continue" id="btnContinue">
+                <span class="btn-text">Continuar la sorpresa</span>
+                <span class="btn-heart">✨</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================
+         �📱 PANTALLA 3: SORPRESA FINAL
          El gran finale emotivo
     ============================================= -->
     <section class="screen screen-finale" id="screenFinale">
@@ -188,7 +231,42 @@
     </div>
 
     <!-- ============================================
-         🔗 SCRIPT PRINCIPAL
+         � VISOR DE GALERÍA
+    ============================================= -->
+    <div class="gallery-viewer" id="galleryViewer">
+        <button class="gallery-close" id="galleryClose">×</button>
+        <button class="gallery-prev" id="galleryPrev">❮</button>
+        <div class="gallery-image-container">
+            <img id="galleryImage" src="" alt="Foto de recuerdo">
+            <p class="gallery-caption" id="galleryCaption"></p>
+        </div>
+        <button class="gallery-next" id="galleryNext">❯</button>
+    </div>
+
+    <!-- ============================================
+         🎮 CÓDIGO KONAMI SECRETO
+         ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️ B A
+    ============================================= -->
+    <div class="konami-modal" id="konamiModal">
+        <div class="konami-content">
+            <button class="close-modal" id="closeKonami">×</button>
+            <div class="konami-animation">
+                🎮✨💖✨🎮
+            </div>
+            <h3 class="konami-title">¡Código Secreto Desbloqueado!</h3>
+            <p class="konami-message" id="konamiMessage">
+                <!-- Mensaje especial del código Konami -->
+            </p>
+            <div class="konami-bonus">
+                <span>🏆</span>
+                <span>Eres increíble por encontrar esto</span>
+                <span>🏆</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         �🔗 SCRIPT PRINCIPAL
     ============================================= -->
     <script src="script.js"></script>
 </body>

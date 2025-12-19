@@ -19,6 +19,10 @@ const CONFIG = {
     // 🎨 TU NOMBRE (para la firma)
     tuNombre: "Tu Amor Eterno",
     
+    // 🎨 FECHA DE INICIO DE LA RELACIÓN (para contador)
+    // Formato: "YYYY-MM-DD" (Año-Mes-Día)
+    fechaInicio: "2024-01-01",
+    
     // 🎨 CARTA ROMÁNTICA - Modifica este texto
     cartaRomantica: `
         <p>Mi amor hermoso,</p>
@@ -56,13 +60,35 @@ const CONFIG = {
     // 🎨 PROMESA ESPECIAL
     promesaEspecial: "Prometo amarte cada día más que el anterior, en este año y en todos los que vengan. 💍",
     
-    // 🎨 MENSAJE SECRETO DEL EASTER EGG
+    // 🎨 MENSAJE SECRETO DEL EASTER EGG (corazón 5 veces)
     mensajeSecreto: `
         Este es un secreto solo entre tú y yo... 
         Eres lo mejor que me ha pasado en la vida. 
         No existe un día en que no agradezca tenerte. 
         Te amo infinitamente. 🌹✨
     `,
+    
+    // 🎨 MENSAJE SECRETO DEL CÓDIGO KONAMI (↑↑↓↓←→←→BA)
+    mensajeKonami: `
+        ¡Has descubierto el código secreto del gamer! 🎮
+        Esto significa que me conoces muy bien...
+        O que eres tan curioso/a como yo te amo.
+        ¡Eres mi jugador/a favorito/a en este juego llamado vida! 💖
+    `,
+    
+    // 🎨 FRASES DE AMOR ALEATORIAS
+    frasesAmor: [
+        "Te amo más de lo que las palabras pueden expresar 💕",
+        "Eres mi persona favorita en el mundo 🌍",
+        "Contigo, cada día es una aventura 🌟",
+        "Mi corazón late por ti 💓",
+        "Eres el sueño que no sabía que tenía ✨",
+        "Tu sonrisa ilumina mi mundo 🌞",
+        "Juntos somos invencibles 💪💖",
+        "Te elijo hoy y siempre 💍",
+        "Eres mi hogar, mi paz, mi todo 🏠💕",
+        "Cada momento contigo es un tesoro 💎"
+    ],
     
     // Velocidad de escritura (ms por caracter)
     velocidadEscritura: 30,
@@ -71,7 +97,10 @@ const CONFIG = {
     cantidadCorazones: 20,
     
     // Cantidad de partículas de fondo
-    cantidadParticulas: 30
+    cantidadParticulas: 30,
+    
+    // Cantidad de pétalos
+    cantidadPetalos: 15
 };
 
 // ============================================
@@ -82,11 +111,13 @@ const elementos = {
     // Pantallas
     screenIntro: document.getElementById('screenIntro'),
     screenLetter: document.getElementById('screenLetter'),
+    screenGallery: document.getElementById('screenGallery'),
     screenFinale: document.getElementById('screenFinale'),
     
     // Botones
     btnStart: document.getElementById('btnStart'),
     btnSurprise: document.getElementById('btnSurprise'),
+    btnContinue: document.getElementById('btnContinue'),
     btnRestart: document.getElementById('btnRestart'),
     
     // Carta
@@ -94,6 +125,16 @@ const elementos = {
     letterPaper: document.getElementById('letterPaper'),
     letterContent: document.getElementById('letterContent'),
     letterDate: document.getElementById('letterDate'),
+    
+    // Galería
+    galleryGrid: document.getElementById('galleryGrid'),
+    galleryViewer: document.getElementById('galleryViewer'),
+    galleryImage: document.getElementById('galleryImage'),
+    galleryCaption: document.getElementById('galleryCaption'),
+    galleryClose: document.getElementById('galleryClose'),
+    galleryPrev: document.getElementById('galleryPrev'),
+    galleryNext: document.getElementById('galleryNext'),
+    timeCounter: document.getElementById('timeCounter'),
     
     // Final
     finaleTitle: document.getElementById('finaleTitle'),
@@ -109,12 +150,19 @@ const elementos = {
     particles: document.getElementById('particles'),
     floatingHearts: document.getElementById('floatingHearts'),
     fireworks: document.getElementById('fireworks'),
+    petals: document.getElementById('petals'),
+    shootingStars: document.getElementById('shootingStars'),
+    floatingQuotes: document.getElementById('floatingQuotes'),
+    confetti: document.getElementById('confetti'),
     
-    // Easter Egg
+    // Easter Eggs
     easterEggTrigger: document.getElementById('easterEggTrigger'),
     easterEggModal: document.getElementById('easterEggModal'),
     easterEggMessage: document.getElementById('easterEggMessage'),
-    closeEasterEgg: document.getElementById('closeEasterEgg')
+    closeEasterEgg: document.getElementById('closeEasterEgg'),
+    konamiModal: document.getElementById('konamiModal'),
+    konamiMessage: document.getElementById('konamiMessage'),
+    closeKonami: document.getElementById('closeKonami')
 };
 
 // ============================================
@@ -432,8 +480,17 @@ async function abrirCarta() {
 // 🎉 PANTALLA FINAL
 // ============================================
 
+function mostrarGaleria() {
+    mostrarPantalla(elementos.screenLetter, elementos.screenGallery);
+    
+    // Iniciar contador de tiempo juntos
+    setTimeout(() => {
+        actualizarContadorTiempo();
+    }, 500);
+}
+
 function mostrarFinale() {
-    mostrarPantalla(elementos.screenLetter, elementos.screenFinale);
+    mostrarPantalla(elementos.screenGallery, elementos.screenFinale);
     
     // Establecer contenido
     elementos.finaleTitle.textContent = CONFIG.tituloFinal;
@@ -444,6 +501,7 @@ function mostrarFinale() {
     setTimeout(() => {
         crearFuegosArtificiales();
         iniciarCuentaRegresiva();
+        lanzarConfeti();
     }, 500);
 }
 
@@ -494,6 +552,7 @@ function cerrarEasterEgg() {
 function reiniciarExperiencia() {
     // Ocultar pantalla final
     elementos.screenFinale.classList.remove('active');
+    elementos.screenGallery.classList.remove('active');
     
     // Reiniciar carta
     elementos.envelope.style.display = 'block';
@@ -502,8 +561,9 @@ function reiniciarExperiencia() {
     elementos.letterContent.innerHTML = '';
     elementos.btnSurprise.classList.remove('visible');
     
-    // Limpiar fuegos artificiales
+    // Limpiar fuegos artificiales y confeti
     elementos.fireworks.innerHTML = '';
+    elementos.confetti.innerHTML = '';
     
     // Mostrar pantalla inicial
     setTimeout(() => {
@@ -524,6 +584,10 @@ function inicializar() {
     // Crear efectos de fondo
     crearParticulas();
     crearCorazonesFlotantes();
+    crearPetalos();
+    iniciarEstrellasFugaces();
+    iniciarFrasesFlotantes();
+    iniciarCodigoKonami();
     
     // Event Listeners
     
@@ -540,8 +604,11 @@ function inicializar() {
         }, 600);
     });
     
-    // Botón sorpresa
-    elementos.btnSurprise.addEventListener('click', mostrarFinale);
+    // Botón sorpresa -> Galería
+    elementos.btnSurprise.addEventListener('click', mostrarGaleria);
+    
+    // Botón continuar -> Finale
+    elementos.btnContinue.addEventListener('click', mostrarFinale);
     
     // Botón reiniciar
     elementos.btnRestart.addEventListener('click', reiniciarExperiencia);
@@ -559,8 +626,27 @@ function inicializar() {
     
     // Cerrar modal con Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && elementos.easterEggModal.classList.contains('active')) {
-            cerrarEasterEgg();
+        if (e.key === 'Escape') {
+            if (elementos.easterEggModal.classList.contains('active')) {
+                cerrarEasterEgg();
+            }
+            if (elementos.konamiModal.classList.contains('active')) {
+                cerrarKonami();
+            }
+            if (elementos.galleryViewer.classList.contains('active')) {
+                cerrarVisorGaleria();
+            }
+        }
+    });
+    
+    // Galería de fotos
+    inicializarGaleria();
+    
+    // Cerrar Konami
+    elementos.closeKonami.addEventListener('click', cerrarKonami);
+    elementos.konamiModal.addEventListener('click', (e) => {
+        if (e.target === elementos.konamiModal) {
+            cerrarKonami();
         }
     });
     
@@ -691,17 +777,351 @@ if (localStorage.getItem('debug') === 'true') {
         if (e.ctrlKey && e.key === '1') {
             elementos.screenIntro.classList.add('active');
             elementos.screenLetter.classList.remove('active');
+            elementos.screenGallery.classList.remove('active');
             elementos.screenFinale.classList.remove('active');
         }
         if (e.ctrlKey && e.key === '2') {
             elementos.screenIntro.classList.remove('active');
             elementos.screenLetter.classList.add('active');
+            elementos.screenGallery.classList.remove('active');
             elementos.screenFinale.classList.remove('active');
         }
         if (e.ctrlKey && e.key === '3') {
             elementos.screenIntro.classList.remove('active');
             elementos.screenLetter.classList.remove('active');
+            elementos.screenGallery.classList.add('active');
+            elementos.screenFinale.classList.remove('active');
+        }
+        if (e.ctrlKey && e.key === '4') {
+            elementos.screenIntro.classList.remove('active');
+            elementos.screenLetter.classList.remove('active');
+            elementos.screenGallery.classList.remove('active');
             elementos.screenFinale.classList.add('active');
         }
     });
+}
+
+// ============================================
+// 🌹 PÉTALOS DE ROSA CAYENDO
+// ============================================
+
+function crearPetalos() {
+    for (let i = 0; i < CONFIG.cantidadPetalos; i++) {
+        setTimeout(() => crearPetalo(), i * 800);
+    }
+    
+    // Crear pétalos continuamente
+    setInterval(crearPetalo, 2000);
+}
+
+function crearPetalo() {
+    const petalo = document.createElement('div');
+    petalo.className = 'petal';
+    
+    // Posición horizontal aleatoria
+    petalo.style.left = `${Math.random() * 100}%`;
+    
+    // Tamaño aleatorio
+    const size = Math.random() * 15 + 10;
+    petalo.style.width = `${size}px`;
+    petalo.style.height = `${size}px`;
+    
+    // Duración aleatoria
+    const duration = Math.random() * 5 + 8;
+    petalo.style.animationDuration = `${duration}s`;
+    
+    // Rotación inicial aleatoria
+    petalo.style.transform = `rotate(${Math.random() * 360}deg)`;
+    
+    elementos.petals.appendChild(petalo);
+    
+    // Remover después de la animación
+    setTimeout(() => petalo.remove(), duration * 1000);
+}
+
+// ============================================
+// ⭐ ESTRELLAS FUGACES
+// ============================================
+
+function iniciarEstrellasFugaces() {
+    // Crear estrellas fugaces cada cierto tiempo
+    setInterval(crearEstrellaFugaz, 4000);
+}
+
+function crearEstrellaFugaz() {
+    const estrella = document.createElement('div');
+    estrella.className = 'shooting-star';
+    
+    // Posición inicial aleatoria (parte superior derecha)
+    estrella.style.top = `${Math.random() * 40}%`;
+    estrella.style.left = `${50 + Math.random() * 50}%`;
+    
+    // Duración aleatoria
+    const duration = Math.random() * 0.5 + 0.8;
+    estrella.style.animationDuration = `${duration}s`;
+    
+    elementos.shootingStars.appendChild(estrella);
+    
+    // Remover después de la animación
+    setTimeout(() => estrella.remove(), duration * 1000);
+}
+
+// ============================================
+// 💬 FRASES DE AMOR FLOTANTES
+// ============================================
+
+function iniciarFrasesFlotantes() {
+    // Mostrar una frase cada cierto tiempo
+    setTimeout(() => {
+        mostrarFraseFlotante();
+        setInterval(mostrarFraseFlotante, 12000);
+    }, 5000);
+}
+
+function mostrarFraseFlotante() {
+    const frase = CONFIG.frasesAmor[Math.floor(Math.random() * CONFIG.frasesAmor.length)];
+    
+    const elemento = document.createElement('div');
+    elemento.className = 'floating-quote';
+    elemento.textContent = frase;
+    
+    // Posición vertical aleatoria
+    elemento.style.top = `${20 + Math.random() * 60}%`;
+    elemento.style.left = '-100%';
+    
+    // Duración aleatoria
+    const duration = Math.random() * 5 + 12;
+    elemento.style.animationDuration = `${duration}s`;
+    
+    elementos.floatingQuotes.appendChild(elemento);
+    
+    // Remover después de la animación
+    setTimeout(() => elemento.remove(), duration * 1000);
+}
+
+// ============================================
+// 🎊 CONFETI
+// ============================================
+
+const coloresConfeti = ['#ff6b9d', '#ffd700', '#9b59b6', '#e74c3c', '#00ff88', '#fff', '#ff9eb5'];
+const formasConfeti = ['square', 'circle', 'strip'];
+
+function lanzarConfeti() {
+    // Lanzar muchos confetis
+    for (let i = 0; i < 100; i++) {
+        setTimeout(() => crearConfeti(), i * 50);
+    }
+    
+    // Seguir lanzando confeti
+    setInterval(() => {
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => crearConfeti(), i * 100);
+        }
+    }, 3000);
+}
+
+function crearConfeti() {
+    const confeti = document.createElement('div');
+    const forma = formasConfeti[Math.floor(Math.random() * formasConfeti.length)];
+    confeti.className = `confetti ${forma}`;
+    
+    // Color aleatorio
+    confeti.style.background = coloresConfeti[Math.floor(Math.random() * coloresConfeti.length)];
+    
+    // Posición horizontal aleatoria
+    confeti.style.left = `${Math.random() * 100}%`;
+    
+    // Tamaño aleatorio
+    if (forma === 'strip') {
+        confeti.style.width = `${Math.random() * 4 + 3}px`;
+        confeti.style.height = `${Math.random() * 15 + 10}px`;
+    } else {
+        const size = Math.random() * 10 + 5;
+        confeti.style.width = `${size}px`;
+        confeti.style.height = `${size}px`;
+    }
+    
+    // Duración aleatoria
+    const duration = Math.random() * 3 + 4;
+    confeti.style.animationDuration = `${duration}s`;
+    
+    elementos.confetti.appendChild(confeti);
+    
+    // Remover después de la animación
+    setTimeout(() => confeti.remove(), duration * 1000);
+}
+
+// ============================================
+// 💑 CONTADOR DE TIEMPO JUNTOS
+// ============================================
+
+function actualizarContadorTiempo() {
+    const fechaInicio = new Date(CONFIG.fechaInicio);
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+    
+    // Calcular tiempo
+    const años = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365));
+    const meses = Math.floor((diferencia % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+    const dias = Math.floor((diferencia % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
+    elementos.timeCounter.innerHTML = `
+        ${años > 0 ? `<div class="time-unit"><span class="time-number">${años}</span><span class="time-text">${años === 1 ? 'año' : 'años'}</span></div>` : ''}
+        <div class="time-unit"><span class="time-number">${meses}</span><span class="time-text">${meses === 1 ? 'mes' : 'meses'}</span></div>
+        <div class="time-unit"><span class="time-number">${dias}</span><span class="time-text">${dias === 1 ? 'día' : 'días'}</span></div>
+        <div class="time-unit"><span class="time-number">${horas}</span><span class="time-text">${horas === 1 ? 'hora' : 'horas'}</span></div>
+    `;
+    
+    // Actualizar cada minuto
+    setTimeout(actualizarContadorTiempo, 60000);
+}
+
+// ============================================
+// 📸 GALERÍA DE FOTOS
+// ============================================
+
+let galeriaActual = 0;
+const imagenes = [];
+
+function inicializarGaleria() {
+    const items = elementos.galleryGrid.querySelectorAll('.gallery-item');
+    
+    items.forEach((item, index) => {
+        // Guardar información
+        imagenes.push({
+            src: item.querySelector('img')?.src || null,
+            caption: item.dataset.caption || ''
+        });
+        
+        // Evento click
+        item.addEventListener('click', () => {
+            if (imagenes[index].src) {
+                abrirVisorGaleria(index);
+            }
+        });
+    });
+    
+    // Navegación del visor
+    elementos.galleryClose.addEventListener('click', cerrarVisorGaleria);
+    elementos.galleryPrev.addEventListener('click', () => navegarGaleria(-1));
+    elementos.galleryNext.addEventListener('click', () => navegarGaleria(1));
+    
+    // Cerrar con click fuera
+    elementos.galleryViewer.addEventListener('click', (e) => {
+        if (e.target === elementos.galleryViewer) {
+            cerrarVisorGaleria();
+        }
+    });
+    
+    // Navegación con teclado
+    document.addEventListener('keydown', (e) => {
+        if (!elementos.galleryViewer.classList.contains('active')) return;
+        
+        if (e.key === 'ArrowLeft') navegarGaleria(-1);
+        if (e.key === 'ArrowRight') navegarGaleria(1);
+    });
+}
+
+function abrirVisorGaleria(index) {
+    galeriaActual = index;
+    actualizarVisorGaleria();
+    elementos.galleryViewer.classList.add('active');
+    vibrar(30);
+}
+
+function cerrarVisorGaleria() {
+    elementos.galleryViewer.classList.remove('active');
+}
+
+function navegarGaleria(direccion) {
+    galeriaActual += direccion;
+    
+    // Loop infinito
+    if (galeriaActual < 0) galeriaActual = imagenes.length - 1;
+    if (galeriaActual >= imagenes.length) galeriaActual = 0;
+    
+    actualizarVisorGaleria();
+}
+
+function actualizarVisorGaleria() {
+    const imagen = imagenes[galeriaActual];
+    if (imagen.src) {
+        elementos.galleryImage.src = imagen.src;
+        elementos.galleryCaption.textContent = imagen.caption;
+    }
+}
+
+// ============================================
+// 🎮 CÓDIGO KONAMI (↑↑↓↓←→←→BA)
+// ============================================
+
+const codigoKonami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let posicionKonami = 0;
+
+function iniciarCodigoKonami() {
+    document.addEventListener('keydown', (e) => {
+        const tecla = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        
+        if (tecla === codigoKonami[posicionKonami]) {
+            posicionKonami++;
+            
+            if (posicionKonami === codigoKonami.length) {
+                activarKonami();
+                posicionKonami = 0;
+            }
+        } else {
+            posicionKonami = 0;
+        }
+    });
+}
+
+function activarKonami() {
+    console.log('🎮 ¡Código Konami activado!');
+    elementos.konamiMessage.innerHTML = CONFIG.mensajeKonami;
+    elementos.konamiModal.classList.add('active');
+    vibrar([100, 50, 100, 50, 200]);
+    
+    // Explosión de efectos
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            crearCorazon();
+            crearConfeti();
+        }, i * 50);
+    }
+}
+
+function cerrarKonami() {
+    elementos.konamiModal.classList.remove('active');
+}
+
+// ============================================
+// 📱 SOPORTE TÁCTIL MEJORADO
+// ============================================
+
+// Detectar swipe para navegación
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    manejarSwipe();
+}, { passive: true });
+
+function manejarSwipe() {
+    const diferencia = touchStartX - touchEndX;
+    const umbral = 100;
+    
+    // Si el visor de galería está activo
+    if (elementos.galleryViewer.classList.contains('active')) {
+        if (diferencia > umbral) {
+            navegarGaleria(1); // Swipe izquierda -> siguiente
+        } else if (diferencia < -umbral) {
+            navegarGaleria(-1); // Swipe derecha -> anterior
+        }
+    }
 }

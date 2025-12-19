@@ -1039,6 +1039,529 @@ body {
 }
 
 /* ============================================
+   🌹 PÉTALOS DE ROSA CAYENDO
+============================================ */
+.petals-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(135deg, #ff9eb5 0%, #ff6b9d 50%, #e84393 100%);
+    border-radius: 150% 0 150% 0;
+    opacity: 0.8;
+    animation: petalFall linear forwards;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.petal::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    border-radius: inherit;
+}
+
+@keyframes petalFall {
+    0% {
+        transform: translateY(-20px) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   ⭐ ESTRELLAS FUGACES
+============================================ */
+.shooting-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px white, 0 0 20px 4px rgba(255,215,0,0.5);
+    animation: shootingStar 1s ease-out forwards;
+}
+
+.shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    transform: translateY(-50%);
+}
+
+@keyframes shootingStar {
+    0% {
+        transform: translate(0, 0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-300px, 300px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   💬 FRASES FLOTANTES
+============================================ */
+.floating-quotes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.floating-quote {
+    position: absolute;
+    font-family: var(--font-romantic);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: floatQuote 15s ease-in-out forwards;
+    white-space: nowrap;
+    padding: 10px 20px;
+    background: rgba(255, 107, 157, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+@keyframes floatQuote {
+    0% {
+        transform: translateX(-100%) translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(100vw) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   🎊 CONFETI
+============================================ */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confettiFall linear forwards;
+}
+
+.confetti.square {
+    border-radius: 2px;
+}
+
+.confetti.circle {
+    border-radius: 50%;
+}
+
+.confetti.strip {
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0.5;
+    }
+}
+
+/* ============================================
+   ✨ EFECTO SHIMMER / BRILLO
+============================================ */
+.shimmer-text {
+    background: linear-gradient(
+        90deg,
+        var(--color-white) 0%,
+        var(--color-accent) 25%,
+        var(--color-white) 50%,
+        var(--color-accent) 75%,
+        var(--color-white) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+/* ============================================
+   📸 GALERÍA DE FOTOS
+============================================ */
+.screen-gallery {
+    background: linear-gradient(135deg, #2d1f3d 0%, #1a1a2e 50%, #0f3460 100%);
+}
+
+.gallery-container {
+    max-width: 800px;
+    width: 100%;
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.gallery-title {
+    font-family: var(--font-romantic);
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: var(--spacing-sm);
+}
+
+.gallery-subtitle {
+    font-family: var(--font-elegant);
+    font-size: 1.1rem;
+    color: var(--color-cream);
+    opacity: 0.8;
+    margin-bottom: var(--spacing-lg);
+    font-style: italic;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--color-white);
+}
+
+.gallery-placeholder small {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* Visor de galería */
+.gallery-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-medium);
+}
+
+.gallery-viewer.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.gallery-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition-fast);
+}
+
+.gallery-close:hover {
+    transform: rotate(90deg);
+    color: var(--color-primary);
+}
+
+.gallery-prev,
+.gallery-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 20px 15px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border-radius: 10px;
+}
+
+.gallery-prev:hover,
+.gallery-next:hover {
+    background: var(--color-primary);
+}
+
+.gallery-prev {
+    left: 20px;
+}
+
+.gallery-next {
+    right: 20px;
+}
+
+.gallery-image-container {
+    max-width: 80%;
+    max-height: 80%;
+    text-align: center;
+}
+
+.gallery-image-container img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.gallery-caption {
+    margin-top: var(--spacing-md);
+    font-family: var(--font-romantic);
+    font-size: 1.5rem;
+    color: var(--color-cream);
+}
+
+/* ============================================
+   💑 CONTADOR DE TIEMPO JUNTOS
+============================================ */
+.time-together {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid rgba(255,215,0,0.3);
+}
+
+.time-heart {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+    animation: heartbeat 1.5s infinite;
+}
+
+.time-label {
+    font-family: var(--font-elegant);
+    font-size: 1.1rem;
+    color: var(--color-cream);
+    margin-bottom: var(--spacing-sm);
+}
+
+.time-counter {
+    font-family: var(--font-romantic);
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--color-accent);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.time-unit {
+    background: rgba(255,215,0,0.2);
+    padding: 10px 15px;
+    border-radius: 10px;
+    min-width: 70px;
+}
+
+.time-number {
+    display: block;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.time-text {
+    font-size: 0.7em;
+    opacity: 0.8;
+}
+
+/* ============================================
+   🎮 MODAL CÓDIGO KONAMI
+============================================ */
+.konami-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-medium);
+}
+
+.konami-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.konami-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    border: 3px solid var(--color-accent);
+    border-radius: 30px;
+    padding: var(--spacing-xl);
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    animation: konamiPop 0.5s ease-out;
+    box-shadow: 0 0 50px rgba(255,215,0,0.5);
+}
+
+@keyframes konamiPop {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.konami-animation {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 10px;
+    animation: konamiGlow 1s infinite alternate;
+}
+
+@keyframes konamiGlow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 30px rgba(255,215,0,1));
+    }
+}
+
+.konami-title {
+    font-family: var(--font-romantic);
+    font-size: 2rem;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+}
+
+.konami-message {
+    font-family: var(--font-elegant);
+    font-size: 1.2rem;
+    color: var(--color-cream);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+}
+
+.konami-bonus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: 1rem;
+    color: var(--color-accent);
+}
+
+.konami-bonus span:first-child,
+.konami-bonus span:last-child {
+    font-size: 1.5rem;
+    animation: bounce 1s infinite;
+}
+
+/* ============================================
    🖨️ PRINT STYLES (por si quiere imprimirlo)
 ============================================ */
 @media print {
@@ -1047,6 +1570,10 @@ body {
     .floating-hearts,
     .fireworks,
     .easter-egg-trigger,
+    .petals-container,
+    .shooting-stars,
+    .floating-quotes,
+    .confetti-container,
     .btn-romantic {
         display: none !important;
     }
@@ -1061,5 +1588,43 @@ body {
     body {
         background: white !important;
         color: black !important;
+    }
+}
+
+/* ============================================
+   📱 RESPONSIVE GALERÍA
+============================================ */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    .gallery-prev,
+    .gallery-next {
+        padding: 15px 10px;
+        font-size: 1.5rem;
+    }
+    
+    .gallery-prev {
+        left: 10px;
+    }
+    
+    .gallery-next {
+        right: 10px;
+    }
+    
+    .time-counter {
+        gap: var(--spacing-xs);
+    }
+    
+    .time-unit {
+        padding: 8px 12px;
+        min-width: 60px;
+    }
+    
+    .konami-content {
+        margin: var(--spacing-md);
+        padding: var(--spacing-lg);
     }
 }
