@@ -21,30 +21,30 @@ const CONFIG = {
     
     // 🎨 FECHA DE INICIO DE LA RELACIÓN (para contador)
     // Formato: "YYYY-MM-DD" (Año-Mes-Día)
-    fechaInicio: "2024-01-01",
+    fechaInicio: "2022-08-10",
     
     // 🎨 CARTA ROMÁNTICA - Modifica este texto
     cartaRomantica: `
-        <p>Mi amor hermoso,</p>
+        <p>Mi amor hermosa,</p>
         
         <p>Mientras el año llega a su fin, mi corazón está lleno de gratitud 
         por cada momento que hemos compartido juntos. Cada risa, cada abrazo, 
-        cada mirada... todo ha sido un regalo que atesoro en lo más profundo 
+        cada mirada tuya... todo ha sido un regalo que atesoro en lo más profundo 
         de mi ser.</p>
         
         <p>Este año me enseñaste que el amor verdadero existe, que los cuentos 
         de hadas pueden hacerse realidad, y que contigo a mi lado, cualquier 
-        sueño es posible. Eres mi confidente, mi mejor amigo/a, mi todo.</p>
+        sueño es posible. Eres mi confidente, mi mejor amiga, mi todo.</p>
         
         <p>Gracias por amarme como soy, por hacerme reír cuando más lo necesito, 
         por sostenerme cuando siento que no puedo más. Gracias por ser tú, 
-        simplemente tú, perfectamente imperfecto/a.</p>
+        simplemente tú, perfectamente imperfecta y maravillosa.</p>
         
         <p>Este nuevo año promete ser increíble porque lo viviré a tu lado. 
-        Y aunque no sé qué nos depare el destino, de una cosa estoy seguro/a: 
+        Y aunque no sé qué nos depare el destino, de una cosa estoy seguro: 
         mi amor por ti solo crecerá más y más con cada día que pase.</p>
         
-        <p>Te amo hoy, mañana y siempre. 💕</p>
+        <p>Te amo hoy, mañana y siempre, mi princesa. 💕</p>
     `,
     
     // 🎨 TÍTULO DE LA PANTALLA FINAL
@@ -58,22 +58,22 @@ const CONFIG = {
     `,
     
     // 🎨 PROMESA ESPECIAL
-    promesaEspecial: "Prometo amarte cada día más que el anterior, en este año y en todos los que vengan. 💍",
+    promesaEspecial: "Prometo amarte cada día más que el anterior, en este año y en todos los que vengan, mi reina. 💍",
     
     // 🎨 MENSAJE SECRETO DEL EASTER EGG (corazón 5 veces)
     mensajeSecreto: `
         Este es un secreto solo entre tú y yo... 
         Eres lo mejor que me ha pasado en la vida. 
         No existe un día en que no agradezca tenerte. 
-        Te amo infinitamente. 🌹✨
+        Te amo infinitamente, mi princesa hermosa. 🌹✨
     `,
     
     // 🎨 MENSAJE SECRETO DEL CÓDIGO KONAMI (↑↑↓↓←→←→BA)
     mensajeKonami: `
         ¡Has descubierto el código secreto del gamer! 🎮
         Esto significa que me conoces muy bien...
-        O que eres tan curioso/a como yo te amo.
-        ¡Eres mi jugador/a favorito/a en este juego llamado vida! 💖
+        O que eres tan curiosa como yo te amo.
+        ¡Eres mi jugadora favorita en este juego llamado vida! 💖
     `,
     
     // 🎨 FRASES DE AMOR ALEATORIAS
@@ -81,13 +81,15 @@ const CONFIG = {
         "Te amo más de lo que las palabras pueden expresar 💕",
         "Eres mi persona favorita en el mundo 🌍",
         "Contigo, cada día es una aventura 🌟",
-        "Mi corazón late por ti 💓",
+        "Mi corazón late solo por ti 💓",
         "Eres el sueño que no sabía que tenía ✨",
         "Tu sonrisa ilumina mi mundo 🌞",
         "Juntos somos invencibles 💪💖",
-        "Te elijo hoy y siempre 💍",
+        "Te elijo hoy y siempre, mi reina 💍",
         "Eres mi hogar, mi paz, mi todo 🏠💕",
-        "Cada momento contigo es un tesoro 💎"
+        "Cada momento contigo es un tesoro 💎",
+        "Eres la mujer más hermosa del mundo 👑",
+        "Gracias por existir, mi vida 🌹"
     ],
     
     // Velocidad de escritura (ms por caracter)
