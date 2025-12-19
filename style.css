@@ -206,10 +206,15 @@ body {
 ============================================ */
 .screen {
     min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height para móviles */
+    height: auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: var(--spacing-lg);
+    padding-top: 80px; /* Espacio para el botón de música */
+    padding-bottom: 40px;
     position: relative;
     opacity: 0;
     visibility: hidden;
@@ -218,6 +223,9 @@ body {
     width: 100%;
     top: 0;
     left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .screen.active {
@@ -943,12 +951,17 @@ body {
 ============================================ */
 @media (max-width: 768px) {
     :root {
-        --spacing-lg: 1.5rem;
-        --spacing-xl: 2rem;
+        --spacing-lg: 1.25rem;
+        --spacing-xl: 1.75rem;
+        --spacing-md: 1rem;
     }
     
     .screen {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
+        padding-top: 60px;
+        padding-bottom: 20px;
+        align-items: center;
+        justify-content: flex-start;
     }
     
     .music-control {
@@ -957,66 +970,221 @@ body {
     }
     
     .music-btn {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
     }
     
     .letter-envelope {
-        width: 160px;
-        height: 120px;
+        width: 140px;
+        height: 100px;
     }
     
     .letter-paper {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
+    }
+    
+    .letter-content {
+        min-height: auto;
+        text-align: left;
+        font-size: 0.95rem;
     }
     
     .btn-romantic {
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-size: 1rem;
+        padding: 10px 18px;
+        font-size: 0.9rem;
     }
     
     .easter-egg-trigger {
-        bottom: 20px;
-        right: 20px;
+        bottom: 15px;
+        right: 15px;
     }
     
     .big-heart {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
     .easter-egg-content {
-        margin: var(--spacing-md);
-        padding: var(--spacing-lg);
+        margin: var(--spacing-sm);
+        padding: var(--spacing-md);
+    }
+    
+    .finale-container {
+        padding: var(--spacing-sm);
+    }
+    
+    .promise-container {
+        padding: var(--spacing-sm);
+    }
+    
+    .gallery-container {
+        padding: var(--spacing-sm);
+    }
+    
+    .intro-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .intro-title {
+        font-size: clamp(1.8rem, 7vw, 3rem);
+    }
+    
+    .time-together {
+        padding: var(--spacing-xs);
+        max-width: 100%;
+    }
+    
+    .time-counter {
+        gap: 4px;
+    }
+    
+    .time-unit {
+        padding: 4px 6px;
+        min-width: 45px;
+    }
+    
+    .time-number {
+        font-size: 1em;
     }
 }
 
 @media (max-width: 480px) {
+    :root {
+        --spacing-sm: 0.75rem;
+        --spacing-md: 0.85rem;
+        --spacing-lg: 1rem;
+    }
+    
+    .screen {
+        padding: var(--spacing-xs);
+        padding-top: 55px;
+        padding-bottom: 15px;
+    }
+    
     .intro-title {
-        font-size: 2.2rem;
+        font-size: 1.6rem;
     }
     
     .intro-subtitle {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
     
     .letter-content {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+    
+    .letter-paper {
+        padding: var(--spacing-xs);
     }
     
     .signature-name {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .year-transition {
+        flex-direction: row;
+        gap: var(--spacing-xs);
+    }
+    
+    .year-old {
+        font-size: 1.3rem;
     }
     
     .year-new {
-        font-size: 2.5rem;
+        font-size: 1.6rem;
     }
     
     .finale-title {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
+    }
+    
+    .finale-message {
+        font-size: 0.85rem;
     }
     
     .promise-text {
-        font-size: 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .promise-container {
+        padding: var(--spacing-xs);
+    }
+    
+    .time-counter {
+        gap: 3px;
+    }
+    
+    .time-unit {
+        padding: 3px 5px;
+        min-width: 40px;
+    }
+    
+    .time-number {
+        font-size: 0.9em;
+    }
+    
+    .time-text {
+        font-size: 0.55em;
+    }
+    
+    .gallery-title {
+        font-size: 1.3rem;
+    }
+    
+    .gallery-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .gallery-grid {
+        gap: 8px;
+    }
+    
+    .gallery-placeholder {
+        font-size: 2rem;
+    }
+    
+    .gallery-placeholder small {
+        font-size: 0.7rem;
+    }
+    
+    .btn-romantic {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .btn-heart {
+        font-size: 1rem;
+    }
+    
+    .floating-quote {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+    
+    .easter-egg-content {
+        padding: var(--spacing-sm);
+        margin: var(--spacing-xs);
+    }
+    
+    .easter-egg-title {
+        font-size: 1.5rem;
+    }
+    
+    .easter-egg-message {
+        font-size: 1rem;
+    }
+    
+    .konami-content {
+        padding: var(--spacing-sm);
+        margin: var(--spacing-xs);
+    }
+    
+    .konami-title {
+        font-size: 1.5rem;
+    }
+    
+    .konami-message {
+        font-size: 1rem;
     }
 }
 
@@ -1257,35 +1425,38 @@ body {
 ============================================ */
 .screen-gallery {
     background: linear-gradient(135deg, #2d1f3d 0%, #1a1a2e 50%, #0f3460 100%);
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-container {
-    max-width: 800px;
+    max-width: 500px;
     width: 100%;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     text-align: center;
+    margin: 0 auto;
 }
 
 .gallery-title {
     font-family: var(--font-romantic);
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     margin-bottom: var(--spacing-sm);
 }
 
 .gallery-subtitle {
     font-family: var(--font-elegant);
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--color-cream);
     opacity: 0.8;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     font-style: italic;
 }
 
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
 }
 
 .gallery-item {
@@ -1421,50 +1592,52 @@ body {
 .time-together {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    border-radius: 15px;
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
     border: 1px solid rgba(255,215,0,0.3);
+    width: 100%;
+    max-width: 400px;
 }
 
 .time-heart {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-sm);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
     animation: heartbeat 1.5s infinite;
 }
 
 .time-label {
     font-family: var(--font-elegant);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: var(--color-cream);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
 }
 
 .time-counter {
     font-family: var(--font-romantic);
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-size: clamp(0.85rem, 2.5vw, 1.2rem);
     color: var(--color-accent);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    gap: 5px;
 }
 
 .time-unit {
     background: rgba(255,215,0,0.2);
-    padding: 10px 15px;
-    border-radius: 10px;
-    min-width: 70px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    min-width: 50px;
 }
 
 .time-number {
     display: block;
-    font-size: 1.5em;
+    font-size: 1.1em;
     font-weight: 700;
 }
 
 .time-text {
-    font-size: 0.7em;
+    font-size: 0.65em;
     opacity: 0.8;
 }
 
@@ -1597,34 +1770,62 @@ body {
 @media (max-width: 768px) {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-sm);
+        gap: 8px;
+    }
+    
+    .gallery-container {
+        max-width: 100%;
+        padding: var(--spacing-sm);
     }
     
     .gallery-prev,
     .gallery-next {
-        padding: 15px 10px;
-        font-size: 1.5rem;
+        padding: 10px 8px;
+        font-size: 1.3rem;
     }
     
     .gallery-prev {
-        left: 10px;
+        left: 5px;
     }
     
     .gallery-next {
-        right: 10px;
+        right: 5px;
     }
     
     .time-counter {
-        gap: var(--spacing-xs);
+        gap: 4px;
     }
     
     .time-unit {
-        padding: 8px 12px;
-        min-width: 60px;
+        padding: 4px 6px;
+        min-width: 45px;
+    }
+    
+    .time-label {
+        font-size: 0.8rem;
     }
     
     .konami-content {
-        margin: var(--spacing-md);
-        padding: var(--spacing-lg);
+        margin: var(--spacing-xs);
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 400px) {
+    .time-unit {
+        padding: 3px 4px;
+        min-width: 38px;
+    }
+    
+    .time-number {
+        font-size: 0.85em;
+    }
+    
+    .time-text {
+        font-size: 0.5em;
+    }
+    
+    .gallery-item {
+        border-radius: 10px;
     }
 }
