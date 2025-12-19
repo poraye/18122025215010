@@ -122,8 +122,26 @@ const elementos = {
 // ============================================
 
 let musicPlaying = false;
+let musicAvailable = false;
+
+// Verificar si el archivo de música existe
+function verificarMusica() {
+    elementos.backgroundMusic.addEventListener('canplaythrough', () => {
+        musicAvailable = true;
+        elementos.musicBtn.parentElement.style.display = 'block';
+    });
+    
+    elementos.backgroundMusic.addEventListener('error', () => {
+        musicAvailable = false;
+        // Ocultar botón si no hay música
+        elementos.musicBtn.parentElement.style.display = 'none';
+        console.log('💡 Tip: Agrega tu música favorita en assets/music.mp3');
+    });
+}
 
 function toggleMusic() {
+    if (!musicAvailable) return;
+    
     if (musicPlaying) {
         elementos.backgroundMusic.pause();
         elementos.musicBtn.classList.remove('playing');
@@ -500,6 +518,9 @@ function reiniciarExperiencia() {
 function inicializar() {
     console.log('💖 Inicializando detalle romántico...');
     
+    // Verificar música disponible
+    verificarMusica();
+    
     // Crear efectos de fondo
     crearParticulas();
     crearCorazonesFlotantes();
@@ -545,7 +566,9 @@ function inicializar() {
     
     // Intentar reproducir música al primer click (para móviles)
     document.addEventListener('click', function iniciarMusica() {
-        elementos.backgroundMusic.play().catch(() => {});
+        if (musicAvailable) {
+            elementos.backgroundMusic.play().catch(() => {});
+        }
         document.removeEventListener('click', iniciarMusica);
     }, { once: true });
     
