@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Un detalle romántico especial de fin de año para alguien muy especial 💕">
+    <title>💖 Para Ti, Mi Amor 💖</title>
+    
+    <!-- ============================================
+         🎨 PERSONALIZACIÓN: Cambia el título arriba
+         por el nombre de tu persona especial
+    ============================================= -->
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ============================================
+         ✨ PARTÍCULAS Y EFECTOS DE FONDO
+    ============================================= -->
+    <div class="particles-container" id="particles"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- ============================================
+         🎵 CONTROL DE MÚSICA (Opcional)
+         Agrega tu archivo music.mp3 en la carpeta assets/
+    ============================================= -->
+    <div class="music-control" id="musicControl">
+        <button class="music-btn" id="musicBtn" aria-label="Reproducir música">
+            <span class="music-icon">🎵</span>
+        </button>
+    </div>
+    <audio id="backgroundMusic" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+        <!-- 🎨 PERSONALIZACIÓN: Cambia music.mp3 por tu canción romántica favorita -->
+    </audio>
+
+    <!-- ============================================
+         📱 PANTALLA 1: INICIO
+         Primera impresión mágica
+    ============================================= -->
+    <section class="screen screen-intro active" id="screenIntro">
+        <div class="intro-content">
+            <div class="sparkle-wrapper">
+                <span class="sparkle">✨</span>
+                <span class="sparkle">💫</span>
+                <span class="sparkle">✨</span>
+            </div>
+            
+            <h1 class="intro-title">
+                <!-- 🎨 PERSONALIZACIÓN: Cambia este título -->
+                Para Alguien Muy Especial
+            </h1>
+            
+            <p class="intro-subtitle">
+                <!-- 🎨 PERSONALIZACIÓN: Cambia esta frase romántica -->
+                Porque cada momento contigo es un regalo del destino...
+            </p>
+            
+            <div class="intro-date">
+                <span class="date-decoration">❄️</span>
+                <span>Fin de Año 2024 - 2025</span>
+                <span class="date-decoration">❄️</span>
+            </div>
+            
+            <button class="btn-romantic btn-start" id="btnStart">
+                <span class="btn-text">Comenzar</span>
+                <span class="btn-heart">💖</span>
+            </button>
+            
+            <p class="intro-hint">Toca para descubrir algo especial...</p>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         📱 PANTALLA 2: LA CARTA ROMÁNTICA
+         El corazón del mensaje
+    ============================================= -->
+    <section class="screen screen-letter" id="screenLetter">
+        <div class="letter-container">
+            <div class="letter-envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-heart">💌</div>
+            </div>
+            
+            <div class="letter-paper" id="letterPaper">
+                <div class="letter-header">
+                    <div class="letter-decoration">💕</div>
+                    <p class="letter-date" id="letterDate"></p>
+                </div>
+                
+                <div class="letter-content" id="letterContent">
+                    <!-- 🎨 PERSONALIZACIÓN: Modifica esta carta en script.js -->
+                    <!-- El texto se escribirá con efecto de máquina de escribir -->
+                </div>
+                
+                <div class="letter-signature">
+                    <p class="signature-text">Con todo mi amor,</p>
+                    <!-- 🎨 PERSONALIZACIÓN: Cambia tu nombre aquí -->
+                    <p class="signature-name">Tu amor eterno 💝</p>
+                </div>
+                
+                <div class="letter-footer">
+                    <div class="letter-kiss">💋</div>
+                </div>
+            </div>
+            
+            <button class="btn-romantic btn-surprise" id="btnSurprise">
+                <span class="btn-text">Tengo una sorpresa para ti</span>
+                <span class="btn-heart">🎁</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================
+         📱 PANTALLA 3: SORPRESA FINAL
+         El gran finale emotivo
+    ============================================= -->
+    <section class="screen screen-finale" id="screenFinale">
+        <div class="finale-container">
+            <div class="fireworks" id="fireworks"></div>
+            
+            <div class="finale-content">
+                <div class="year-transition">
+                    <span class="year-old">2024</span>
+                    <span class="year-arrow">→</span>
+                    <span class="year-new">2025</span>
+                </div>
+                
+                <h2 class="finale-title" id="finaleTitle">
+                    <!-- 🎨 PERSONALIZACIÓN: Mensaje final en script.js -->
+                </h2>
+                
+                <div class="finale-message" id="finaleMessage">
+                    <!-- Contenido generado por JavaScript -->
+                </div>
+                
+                <div class="promise-container">
+                    <div class="promise-heart">💖</div>
+                    <p class="promise-text" id="promiseText">
+                        <!-- 🎨 PERSONALIZACIÓN: Tu promesa especial en script.js -->
+                    </p>
+                </div>
+                
+                <div class="finale-countdown" id="countdown">
+                    <!-- Cuenta regresiva al año nuevo si aplica -->
+                </div>
+                
+                <button class="btn-romantic btn-restart" id="btnRestart">
+                    <span class="btn-text">Volver a vivir este momento</span>
+                    <span class="btn-heart">🔄</span>
+                </button>
+            </div>
+            
+            <!-- Easter Egg: Toca 5 veces el corazón grande -->
+            <div class="easter-egg-trigger" id="easterEggTrigger">
+                <span class="big-heart">💗</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         🥚 EASTER EGG SECRETO
+         Una sorpresa oculta especial
+    ============================================= -->
+    <div class="easter-egg-modal" id="easterEggModal">
+        <div class="easter-egg-content">
+            <button class="close-modal" id="closeEasterEgg">×</button>
+            <div class="easter-egg-hearts">
+                💖💕💗💝💘
+            </div>
+            <h3 class="easter-egg-title">¡Encontraste el secreto!</h3>
+            <p class="easter-egg-message" id="easterEggMessage">
+                <!-- 🎨 PERSONALIZACIÓN: Mensaje secreto en script.js -->
+            </p>
+            <div class="easter-egg-animation">
+                <span class="floating-emoji">🌹</span>
+                <span class="floating-emoji">💐</span>
+                <span class="floating-emoji">🌸</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         🔗 SCRIPT PRINCIPAL
+    ============================================= -->
+    <script src="script.js"></script>
+</body>
+</html>
