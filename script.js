@@ -14,10 +14,10 @@
 
 const CONFIG = {
     // 🎨 NOMBRE DE TU PERSONA ESPECIAL
-    nombreEspecial: "Mi Amor",
+    nombreEspecial: "Tete",
     
     // 🎨 TU NOMBRE (para la firma)
-    tuNombre: "Tu Amor Eterno",
+    tuNombre: "Poraye",
     
     // 🎨 FECHA DE INICIO DE LA RELACIÓN (para contador)
     // Formato: "YYYY-MM-DD" (Año-Mes-Día)
